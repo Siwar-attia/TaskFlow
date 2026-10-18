@@ -9,18 +9,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-/** Ce que l'API renvoie : l'entité n'est jamais exposée directement. */
+
 public record TaskResponse(
         UUID id,
-        String title,
+        String titre,
         String description,
-        Priority priority,
-        LocalDate dueDate,
-        boolean completed,
-        boolean overdue,       // calculé : non terminée et échéance dépassée
-        String ownerId,
-        String ownerName,
-        LocalDateTime createdAt,
-        LocalDateTime updatedAt
+        Priority priorite,
+        LocalDate dateEcheance,
+        boolean termine,
+        boolean overdue,
+        String proprietaireId,
+        String proprietaireNom,
+        LocalDateTime dateCreation,
+        LocalDateTime dateMaj
 ) {
 }

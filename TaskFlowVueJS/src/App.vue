@@ -1,11 +1,23 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+import SideBar from './components/SideBar.vue'
+import TopBar from './components/TopBar.vue'
+
+const menuOpen = ref(false) // tiroir du menu sur mobile
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div class="app-shell">
+    <SideBar :open="menuOpen" @close="menuOpen = false" />
+    <main class="main">
+      <TopBar @menu="menuOpen = true" />
+      <div class="container">
+        <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
+      </div>
+    </main>
+  </div>
 </template>
-
-<style scoped></style>

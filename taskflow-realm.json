@@ -428,6 +428,8 @@
   "users" : [ {
     "id" : "3f7363d5-098b-4cd9-9121-98c887f031ae",
     "username" : "alice",
+    "firstName" : "alice",
+    "lastName" : "Alice",
     "email" : "alice@gmail.com",
     "emailVerified" : false,
     "enabled" : true,
@@ -443,7 +445,7 @@
     } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
-    "realmRoles" : [ "user", "default-roles-taskflow" ],
+    "realmRoles" : [ "user" ],
     "notBefore" : 0,
     "groups" : [ ]
   }, {
@@ -464,22 +466,7 @@
     } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
-    "realmRoles" : [ "user", "default-roles-taskflow", "admin" ],
-    "notBefore" : 0,
-    "groups" : [ ]
-  }, {
-    "id" : "099ff7ac-79d3-45fe-afcf-32ecf0214474",
-    "username" : "booba",
-    "firstName" : "booba",
-    "lastName" : "boobaaa",
-    "emailVerified" : false,
-    "enabled" : true,
-    "createdTimestamp" : 1792008739673,
-    "totp" : false,
-    "credentials" : [ ],
-    "disableableCredentialTypes" : [ ],
-    "requiredActions" : [ ],
-    "realmRoles" : [ "user", "default-roles-taskflow" ],
+    "realmRoles" : [ "user", "admin" ],
     "notBefore" : 0,
     "groups" : [ ]
   } ],
@@ -711,7 +698,7 @@
     "alwaysDisplayInConsole" : false,
     "clientAuthenticatorType" : "client-secret",
     "redirectUris" : [ "http://localhost:5173/*" ],
-    "webOrigins" : [ "http://localhost:5173/*" ],
+    "webOrigins" : [ "http://localhost:5173" ],
     "notBefore" : 0,
     "bearerOnly" : false,
     "consentRequired" : false,
