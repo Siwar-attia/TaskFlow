@@ -8,7 +8,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/** Documentation OpenAPI : Swagger UI sur /swagger-ui.html, avec un bouton "Authorize" (jeton Bearer). */
+
 @Configuration
 public class OpenApiConfig {
 
@@ -16,7 +16,7 @@ public class OpenApiConfig {
     OpenAPI taskFlowOpenApi() {
         return new OpenAPI()
                 .info(new Info().title("TaskFlow API").version("1.0.0")
-                        .description("API de gestion de tâches sécurisée par Keycloak."))
+                        .description("API de gestion des tâches avec authentification et contrôle d’accès via Keycloak."))
                 .components(new Components().addSecuritySchemes("bearer-jwt",
                         new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")))
                 .addSecurityItem(new SecurityRequirement().addList("bearer-jwt"));

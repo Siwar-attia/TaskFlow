@@ -40,7 +40,7 @@ describe('TasksView', () => {
 
   it('applique le filtre de statut même si l\'API l\'ignore', async () => {
     const w = await mountView()
-    await w.findAll('.segmented button')[2].trigger('click') // onglet "Terminées"
+    await w.findAll('.segmented button')[2].trigger('click') 
     await flushPromises()
     expect(w.findAll('.task')).toHaveLength(1)
     expect(w.text()).toContain('Fini')

@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
- * Format d'erreur UNIQUE de toute l'API (400, 401, 403, 404, 500...).
- * fieldErrors n'est présent que pour les erreurs de validation (champ -> message).
+ * Définit un format unique pour toutes les erreurs de l’API(400, 401, 403, 404, 500...).
+ * fieldErrors contient les erreurs par champ en cas de validation invalide.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record LogErrors(

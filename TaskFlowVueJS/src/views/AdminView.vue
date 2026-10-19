@@ -32,7 +32,7 @@ async function loadTasks() {
 async function loadStats() {
   try {
     const data = await api.adminStats()
-    // accepte un tableau [{owner, completed, ...}] ou un objet { alice: {...}, bob: {...} }
+    
     stats.value = Array.isArray(data)
       ? data.map((s: Record<string, any>) => ({
           owner: s.owner ?? s.username ?? s.proprietaireNom ?? s.proprietaire ?? s.nom ?? '?',

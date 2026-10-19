@@ -12,12 +12,12 @@ const tasks = ref<Task[]>([])
 const totalPages = ref(0)
 const error = ref('')
 const loading = ref(true)
-const busyId = ref<Task['id'] | null>(null) // évite les doubles clics
-const toDelete = ref<Task | null>(null)     // tâche en attente de confirmation
+const busyId = ref<Task['id'] | null>(null) 
+const toDelete = ref<Task | null>(null)     
 
 const filters = reactive({
   page: 0,
-  termine: '',   // '' = toutes, 'false' = en cours, 'true' = terminées
+  termine: '',   
   priorite: '',
   sort: 'dateEcheance,asc'
 })

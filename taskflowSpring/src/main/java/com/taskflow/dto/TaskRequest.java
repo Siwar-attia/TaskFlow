@@ -16,7 +16,7 @@ public record TaskRequest(
         @Size(max = 2000, message = "La description ne doit pas dépasser 2000 caractères")
         String description,
 
-        //@Schema(description = "Priorité ; NORMAL par défaut", example = "NORMAL")
+        //@Schema(description = "Priorité ; NORMALE par défaut", example = "NORMALE")
         Priority priorite,
 
         //@Schema(description = "Date d'échéance (AAAA-MM-JJ), facultative", example = "2026-11-01")

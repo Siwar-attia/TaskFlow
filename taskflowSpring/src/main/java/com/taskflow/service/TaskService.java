@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/** Logique métier. Les contrôleurs ne contiennent aucune règle : ils délèguent ici. */
+/** Contient la logique métier appelée par les contrôleurs. */
 @Service
 @Transactional(readOnly = true)
 public class TaskService {
@@ -35,7 +35,6 @@ public class TaskService {
         this.repository = repository;
     }
 
-    // ---------- Espace utilisateur : toujours restreint à SES tâches ----------
 
     public PageResponse<TaskResponse> listMine(AuthenticatedUser user, Boolean completed, Priority priority,
                                                String sortBy, String direction, int page, int size) {
@@ -64,17 +63,15 @@ public class TaskService {
     }
 
     @Transactional
+    public void delete(AuthenticatedUser user, UUID id) {
+        repository.delete(findOwned(user, id));
+    }
+    @Transactional
     public TaskResponse toggle(AuthenticatedUser user, UUID id) {
         Task task = findOwned(user, id);
         task.setTermine(!task.isTermine());
         return getTeskResponse(repository.save(task));
     }
-
-    @Transactional
-    public void delete(AuthenticatedUser user, UUID id) {
-        repository.delete(findOwned(user, id));
-    }
-
     public TaskStatsResponse myStats(AuthenticatedUser user) {
         LocalDate today = LocalDate.now();
         return new TaskStatsResponse(
@@ -83,7 +80,7 @@ public class TaskService {
                 repository.getNbTaskEnRetard(user.id(), today));
     }
 
-    // ---------- Espace administrateur : toutes les tâches ----------
+
 
     public PageResponse<TaskResponse> listAll(String ownerId, Boolean completed, Priority priority,
                                               String sortBy, String direction, int page, int size) {
@@ -100,7 +97,7 @@ public class TaskService {
         return repository.getUserStatList(LocalDate.now()).stream().map(r ->
                 new UserStatsTask((String) r[0], (String) r[1],((Long) r[2]), ((Long) r[3]), ((Long) r[4]))).toList();}
 
-    // ---------- Méthodes internes ----------
+
 
     /** Une tâche d'un autre utilisateur est traitée comme inexistante (404) : on ne révèle pas son existence. */
     private Task findOwned(AuthenticatedUser user, UUID id) {

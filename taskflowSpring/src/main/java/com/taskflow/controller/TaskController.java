@@ -41,13 +41,12 @@ public class TaskController {
 
     }
 
-    // ===== Espace utilisateur (rôle user) =====
 
     @GetMapping("/tasks")
 
     @Tag(name = "Mes tâches")
 
-    @Operation(summary = "Liste paginée de mes tâches (filtres statut/priorité, tri échéance/création)")
+    @Operation(summary = "Liste paginée de tâches (avec filtres sur statut/priorité, tri par date échéance/ date création)")
 
     public PageResponse<TaskResponse> list(
 
@@ -73,7 +72,7 @@ public class TaskController {
 
     @Tag(name = "Mes tâches")
 
-    @Operation(summary = "Mes statistiques : terminées, en cours, en retard")
+    @Operation(summary = "Affichage des statistiques des tâches : terminées, en cours et en retard")
 
     public TaskStatsResponse stats(@AuthenticationPrincipal Jwt jwt) {
 
@@ -85,7 +84,7 @@ public class TaskController {
 
     @Tag(name = "Mes tâches")
 
-    @Operation(summary = "Détail d'une de mes tâches")
+    @Operation(summary = "Consultation des détails d’une tâche")
 
     public TaskResponse get(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID id) {
 
@@ -111,7 +110,7 @@ public class TaskController {
 
     @Tag(name = "Mes tâches")
 
-    @Operation(summary = "Modifier une de mes tâches")
+    @Operation(summary = "Modifier une tâche")
 
     public TaskResponse update(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID id,
 
@@ -139,7 +138,7 @@ public class TaskController {
 
     @Tag(name = "Mes tâches")
 
-    @Operation(summary = "Supprimer une de mes tâches")
+    @Operation(summary = "Supprimer une tâche")
 
     public void delete(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID id) {
 
@@ -147,13 +146,13 @@ public class TaskController {
 
     }
 
-    // ===== Espace administrateur (rôle admin, imposé par SecurityConfig sur /api/admin/**) =====
+
 
     @GetMapping("/admin/tasks")
 
     @Tag(name = "Administration")
 
-    @Operation(summary = "Toutes les tâches, paginées, filtrables par propriétaire")
+    @Operation(summary = "Consulter toutes les tâches avec pagination et filtre par propriétaire")
 
     public PageResponse<TaskResponse> adminList(
 

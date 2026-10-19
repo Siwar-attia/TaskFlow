@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()      // pré-requêtes CORS
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("admin")
@@ -55,7 +55,7 @@ public class SecurityConfig {
     }
 
 
-    /** CORS : seules les origines listées dans CORS_ALLOWED_ORIGINS (le frontend) peuvent appeler l'API. */
+
     @Bean
     CorsConfigurationSource corsConfigurationSource(@Value("${app.cors.allowed-origins}") String origins) {
         CorsConfiguration config = new CorsConfiguration();

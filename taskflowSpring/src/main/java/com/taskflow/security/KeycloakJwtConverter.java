@@ -12,10 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Keycloak place les rôles du realm dans le claim  realm_access.roles  :
- *   "realm_access": { "roles": ["user", "admin", ...] }
- * Spring ne le sait pas : on les convertit en autorités "ROLE_user", "ROLE_admin"
- * pour pouvoir écrire hasRole("admin") dans la configuration.
+ * Extrait les rôles du realm depuis le jeton Keycloak et les convertit
+ * en autorités Spring Security au format ROLE_nom pour utiliser hasRole().
  */
 public class KeycloakJwtConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 

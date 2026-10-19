@@ -13,7 +13,7 @@ const isEdit = computed(() => !!props.id)
 const form = reactive<{ titre: string; description: string; priorite: Priority; dateEcheance: string }>({
   titre: '', description: '', priorite: 'NORMALE', dateEcheance: ''
 })
-const errors = ref<Record<string, string>>({})     // erreurs par champ (validation locale + API)
+const errors = ref<Record<string, string>>({})   
 const globalError = ref('')
 const saving = ref(false)
 const loading = ref(false)

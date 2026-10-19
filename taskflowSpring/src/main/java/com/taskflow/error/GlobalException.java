@@ -21,10 +21,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Transforme TOUTES les exceptions en ApiError.
- * On étend ResponseEntityExceptionHandler pour récupérer gratuitement la gestion des erreurs
- * standard de Spring MVC (JSON illisible, mauvais type de paramètre, méthode non supportée...)
- * et on remplace simplement leur format de sortie par le nôtre.
+ * Convertit les exceptions en ApiError.
+ * Étend ResponseEntityExceptionHandler pour gérer les erreurs standard
+ * de Spring MVC et uniformiser leur format de réponse.
  */
 @RestControllerAdvice
 public class GlobalException extends ResponseEntityExceptionHandler {
@@ -41,20 +40,20 @@ public class GlobalException extends ResponseEntityExceptionHandler {
         return build(HttpStatus.BAD_REQUEST, ex.getMessage(),  null);
     }
 
-    /** Sans ce handler, le handler générique ci-dessous transformerait un 403 en 500. */
+    /**   Évite que le handler générique transforme une erreur 403 en erreur 500. */
     @ExceptionHandler(AccessDeniedException.class)
     ResponseEntity<Object> handleAccessDenied(AccessDeniedException ex, HttpServletRequest req) {
         return build(HttpStatus.FORBIDDEN, "Accès refusé : droits insuffisants",  null);
     }
 
-    /** Filet de sécurité : on log le détail côté serveur mais on ne le montre pas au client. */
+    /** Filet de sécurité : Journalise les détails de l’erreur côté serveur sans les exposer au client. */
     @ExceptionHandler(Exception.class)
     ResponseEntity<Object> handleUnexpected(Exception ex, HttpServletRequest req) {
-        log.error("Erreur inattendue sur {}", req.getRequestURI(), ex);
+        log.error("Erreur sur {}", req.getRequestURI(), ex);
         return build(HttpStatus.INTERNAL_SERVER_ERROR, "Erreur interne du serveur",  null);
     }
 
-    /** Erreurs de validation @Valid : on renvoie un message par champ. */
+    /** Retourne un message d’erreur pour chaque champ invalide. */
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
@@ -64,7 +63,7 @@ public class GlobalException extends ResponseEntityExceptionHandler {
         return build(HttpStatus.BAD_REQUEST, "Les données envoyées sont invalides",  fields);
     }
 
-    /** Toutes les erreurs standard de Spring MVC passent par ici : on impose notre format. */
+    /** Uniformise le format des erreurs standard de Spring MVC. */
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(
             Exception ex, Object body, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request) {

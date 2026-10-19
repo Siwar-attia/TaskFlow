@@ -4,12 +4,12 @@ import { useRoute } from 'vue-router'
 import { auth } from '../services/keycloak'
 import AppIcon from './AppIcon.vue'
 
-// `open` : état du tiroir sur mobile (géré par App.vue)
+
 defineProps<{ open: boolean }>()
 const emit = defineEmits<{ close: [] }>()
 
 const route = useRoute()
-// referme le menu mobile à chaque changement de page
+
 watch(() => route?.fullPath, () => emit('close'))
 
 const isAdmin = computed(() => auth.roles.includes('admin'))

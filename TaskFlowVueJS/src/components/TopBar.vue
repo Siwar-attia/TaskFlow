@@ -10,7 +10,7 @@ const isAdmin = computed(() => auth.roles.includes('admin'))
 
 <template>
   <header class="topbar">
-    <!-- Gauche : bouton menu + logo (mobile uniquement) -->
+    <!--  bouton menu  -->
     <div class="topbar-left">
       <button class="icon-btn burger" aria-label="Ouvrir le menu" data-test="burger" @click="emit('menu')">
         <AppIcon name="menu" />
@@ -18,7 +18,7 @@ const isAdmin = computed(() => auth.roles.includes('admin'))
       <span class="brand-text">TaskFlow</span>
     </div>
 
-    <!-- Droite : utilisateur connecté + déconnexion -->
+    <!-- utilisateur connecté + déconnexion -->
     <div class="topbar-right">
       <div class="top-user">
         <span class="avatar">{{ initials(auth.username) }}</span>

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-/** 401 : pas de jeton, jeton invalide ou expiré. Réponse au format ApiError. */
+/** Renvoie une ApiError avec le statut 401 si le jeton est absent, invalide ou expiré. */
 @Component
 public class ApiAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
@@ -25,6 +25,6 @@ public class ApiAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException ex) throws IOException {
         response.setHeader(HttpHeaders.WWW_AUTHENTICATE, "Bearer");
-        writer.errorLog(request, response, HttpStatus.UNAUTHORIZED, "Authentification requise : jeton absent, invalide ou expiré");
+        writer.errorLog(request, response, HttpStatus.UNAUTHORIZED, "Authentification obligatoire : jeton manquant, invalide ou expiré.");
     }
 }

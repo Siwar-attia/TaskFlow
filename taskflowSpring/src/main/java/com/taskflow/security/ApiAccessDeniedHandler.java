@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-/** 403 : jeton valide mais rôle insuffisant. Réponse au format ApiError. */
+/**  Renvoie une ApiError avec le statut 403 lorsque le rôle est insuffisant. */
 @Component
 public class ApiAccessDeniedHandler implements AccessDeniedHandler {
 

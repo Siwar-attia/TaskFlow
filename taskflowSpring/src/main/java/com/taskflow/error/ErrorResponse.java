@@ -13,9 +13,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 /**
- * Écrit une ApiError dans la réponse HTTP. Sert aux erreurs 401/403 qui surviennent
- * DANS les filtres de sécurité, avant d'atteindre les contrôleurs (donc hors de
- * portée du @RestControllerAdvice).
+ * Renvoie une ApiError pour les erreurs 401/403 générées par les filtres
+ * de sécurité avant l'accès aux contrôleurs, hors du RestControllerAdvice.
  */
 @Component
 public class ErrorResponse {
