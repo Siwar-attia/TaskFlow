@@ -45,7 +45,7 @@ services:
 
   # ---------- API Spring Boot ----------
   - type: web
-    name: taskflow
+    name: taskflowSpring
     runtime: docker
     plan: free
     dockerfilePath: ./taskflowSpring/Dockerfile
