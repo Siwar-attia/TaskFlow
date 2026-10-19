@@ -39,6 +39,7 @@ export interface Stats {
 
 export interface AdminStat extends Stats {
   owner: string
+  ownerId: string
 }
 
 export interface Me {
@@ -47,8 +48,5 @@ export interface Me {
   email: string
   roles: string[]
 }
-export interface AdminStat extends Stats {
-  owner: string
-  ownerId: string
-}
+
 export type QueryParams = Record<string, string | number | boolean | null | undefined>
