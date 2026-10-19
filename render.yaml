@@ -72,9 +72,10 @@ services:
   - type: web
     name: TaskFlowVueJs
     runtime: static
-    buildCommand: cd TaskFlowVueJs && npm ci && npm run build
-    staticPublishPath: ./TaskFlowVueJs/dist
+    buildCommand: cd TaskFlowVueJS && npm ci && npm run build
+    staticPublishPath: ./TaskFlowVueJS/dist
     autoDeployTrigger: checksPass
+    routes:
     routes:
       - type: rewrite
         source: /*
