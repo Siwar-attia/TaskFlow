@@ -75,7 +75,7 @@ services:
     buildCommand: cd TaskFlowVueJS && npm ci && npm run build
     staticPublishPath: ./TaskFlowVueJS/dist
     autoDeployTrigger: checksPass
-    routes:
+    
     routes:
       - type: rewrite
         source: /*
