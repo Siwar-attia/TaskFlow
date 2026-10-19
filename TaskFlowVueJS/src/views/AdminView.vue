@@ -32,13 +32,10 @@ async function loadTasks() {
 async function loadStats() {
   try {
     const data = await api.adminStats()
-    
-    stats.value = Array.isArray(data)
-      ? data.map((s: Record<string, any>) => ({
-          owner: s.owner ?? s.username ?? s.proprietaireNom ?? s.proprietaire ?? s.nom ?? '?',
-          ...normalizeStats(s)
-        }))
-      : Object.entries(data as Record<string, Record<string, any>>).map(([name, s]) => ({ owner: name, ...normalizeStats(s) }))
+    stats.value = (data as Record<string, any>[]).map(s => ({
+      owner: s.ownerName ?? s.ownerId ?? '?',
+      ...normalizeStats(s)
+    }))
   } catch (e) {
     error.value = (e as Error).message
   }
