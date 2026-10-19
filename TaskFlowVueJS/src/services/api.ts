@@ -57,11 +57,16 @@ async function request<T>(method: string, path: string, { params, body }: Reques
   const text = await res.text()
   return (text ? JSON.parse(text) : null) as T
 }
+function toApiParams(p: QueryParams = {}): QueryParams {
+  const { termine, priorite, sort, owner, ...rest } = p
+  const [sortBy, direction] = typeof sort === 'string' && sort ? sort.split(',') : []
+  return { ...rest, completed: termine, priority: priorite, sortBy, direction, ownerId: owner }
+}
 
 export const api = {
   me: () => request<Me>('GET', '/api/me'),
 
-  tasks: (params?: QueryParams) => request<Page<Task>>('GET', '/api/tasks', { params }),
+  tasks: (params?: QueryParams) => request<Page<Task>>('GET', '/api/tasks', { params: toApiParams(params) }),
   task: (id: string | number) => request<Task>('GET', `/api/tasks/${id}`),
   createTask: (data: TaskPayload) => request<Task>('POST', '/api/tasks', { body: data }),
   updateTask: (id: string | number, data: TaskPayload) => request<Task>('PUT', `/api/tasks/${id}`, { body: data }),
@@ -69,9 +74,10 @@ export const api = {
   deleteTask: (id: string | number) => request<null>('DELETE', `/api/tasks/${id}`),
   stats: () => request<Partial<Stats>>('GET', '/api/tasks/stats'),
 
-  adminTasks: (params?: QueryParams) => request<Page<Task>>('GET', '/api/admin/tasks', { params }),
+  adminTasks: (params?: QueryParams) => request<Page<Task>>('GET', '/api/admin/tasks', { params: toApiParams(params) }),
   adminDelete: (id: string | number) => request<null>('DELETE', `/api/admin/tasks/${id}`),
   adminStats: () => request<unknown>('GET', '/api/admin/stats')
 }
 
 export type { AdminStat }
+

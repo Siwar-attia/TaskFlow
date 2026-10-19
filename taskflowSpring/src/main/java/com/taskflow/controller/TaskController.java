@@ -52,7 +52,9 @@ public class TaskController {
 
             @AuthenticationPrincipal Jwt jwt,
 
-            @Parameter(description = "true = terminées, false = non terminées") @RequestParam(required = false) Boolean completed,
+            @Parameter(description = "true = terminées, false = non terminées")
+
+            @RequestParam(required = false) Boolean completed,
 
             @RequestParam(required = false) Priority priority,
 

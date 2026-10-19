@@ -33,8 +33,9 @@ async function loadStats() {
   try {
     const data = await api.adminStats()
     stats.value = (data as Record<string, any>[]).map(s => ({
-      owner: s.ownerName ?? s.ownerId ?? '?',
-      ...normalizeStats(s)
+    owner: s.ownerName ?? s.ownerId ?? '?',
+    ownerId: s.ownerId ?? '',
+    ...normalizeStats(s)
     }))
   } catch (e) {
     error.value = (e as Error).message
@@ -88,8 +89,10 @@ onMounted(() => { loadTasks(); loadStats() })
 
   <div class="section-head"><h2><AppIcon name="tasks" :size="20" /> Toutes les tâches</h2></div>
   <form class="toolbar" @submit.prevent="filter">
-    <input v-model="owner" placeholder="Filtrer par utilisateur (ex : alice)" aria-label="Propriétaire" />
-    <button class="btn">Filtrer</button>
+    <select v-model="owner" aria-label="Propriétaire" @change="filter">
+      <option value="">Tous les utilisateurs</option>
+      <option v-for="s in stats" :key="s.ownerId" :value="s.ownerId">{{ s.owner }}</option>
+    </select>
     <button v-if="owner" type="button" class="btn btn-ghost" @click="clearFilter">Effacer</button>
   </form>
 
