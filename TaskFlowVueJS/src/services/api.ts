@@ -66,7 +66,7 @@ function toApiParams(p: QueryParams = {}): QueryParams {
 export const api = {
   me: () => request<Me>('GET', '/api/me'),
 
-  tasks: (params?: QueryParams) => request<Page<Task>>('GET', '/api/tasks', { params: toApiParams(params) }),
+  tasks: (params?: QueryParams) => request<Page<Task>>('GET', '/api/tasks', { params }),
   task: (id: string | number) => request<Task>('GET', `/api/tasks/${id}`),
   createTask: (data: TaskPayload) => request<Task>('POST', '/api/tasks', { body: data }),
   updateTask: (id: string | number, data: TaskPayload) => request<Task>('PUT', `/api/tasks/${id}`, { body: data }),
