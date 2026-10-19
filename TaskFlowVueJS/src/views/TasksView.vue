@@ -151,7 +151,7 @@ async function confirmDelete() {
         <div class="chips">
           <span class="chip" :class="'prio-' + t.priorite"><AppIcon name="flag" :size="13" /> {{ priorityLabel(t.priorite) }}</span>
           <span class="chip" :class="isOverdue(t) ? 'chip-late' : 'chip-date'">
-            <AppIcon :name="isOverdue(t) ? 'alert' : 'calendar'" :size="13" /> {{ isOverdue(t) ? `En retard (${dueLabel(t.dateEcheance)})` : dueLabel(t.dateEcheance) }}
+            <AppIcon :name="isOverdue(t) ? 'alert' : 'calendar'" :size="13" /> {{ dueLabel(t.dateEcheance) }}
           </span>
         </div>
       </div>
